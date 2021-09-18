@@ -19,4 +19,5 @@ Route::get('/', function () {
 });
 
 
-Route::get('/employee', [EmployeeController::class, 'index'])->name('employee.index');
+// Route::get('/employee', [EmployeeController::class, 'index'])->name('employee.index');
+Route::resource('/employee', EmployeeController::class);

@@ -1,7 +1,19 @@
 @extends('shared.__layout')
+
+@section("title") List @endsection
+
 @section('content')
 
-<div class="row my-2">
+<div class="row mb-4">
+ 
+    <div class="col-xl-6 pull-right">
+            <a href="{{route('employee.create')}}" class="btn btn-success btn-sm"> Add New </a>
+    </div>
+    
+</div>
+
+<div class="row">
+
     <div class="col-md-12">
         
         <div class="card">

@@ -25,7 +25,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        return view('employee.create');
     }
 
     /**
@@ -36,7 +36,20 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'fullName' => 'required|min:5',
+            'email' => 'required'
+        ]);
+
+        $employee = Employee::created($request->all());
+
+        if(!is_null($employee)) {
+            return back()->with('success', 'Success Create New Employee');
+        } 
+        else {
+            return back()->with('failed', 'Failed to Create New Employee , Please check again !!');
+        }
+
     }
 
     /**
@@ -47,7 +60,7 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
-        //
+        return view('employee.show', compact('employee'));
     }
 
     /**
@@ -58,7 +71,7 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        //
+        return view('employee.edit', compact('employee'));
     }
 
     /**
@@ -70,7 +83,19 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, Employee $employee)
     {
-        //
+        $request->validate([
+            'fullName' => 'required|min:5',
+            'email' => 'required'
+        ]);
+
+        $employee = Employee::updated($request->all());
+
+        if(!is_null($employee)) {
+            return back()->with('success', 'Success Updated New Employee');
+        } 
+        else {
+            return back()->with('failed', 'Failed to update this Employee , Please check again !!');
+        }
     }
 
     /**
@@ -81,6 +106,12 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
-        //
+        $employee = $employee->delete();
+        if(!is_null($employee)) {
+            return back()->with('success', 'Employee Deleted');
+        }
+        else {
+            return back()->with('failed', 'Failed to Deleted this Emplotee , tru again !!');
+        }
     }
 }
